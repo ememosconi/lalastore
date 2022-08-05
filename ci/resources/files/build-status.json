@@ -1,0 +1,6 @@
+{
+  "state": "{{STATUS}}",
+  "target_url": "{{BUILD_URL}}",
+  "description": "{{MESSAGE}}",
+  "context": "continuous-integration/jenkins"
+}

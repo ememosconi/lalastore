@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: azurefile-jenkins
+spec:
+  capacity:
+    storage: 30Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: azurefile
+  azureFile:
+    secretName: volume-azurefile-jenkins-secret
+    shareName: jenkins-dev
+    readOnly: false
+  mountOptions:
+  - dir_mode=0777
+  - file_mode=0777
+  - uid=1000
+  - gid=1000
+  - mfsymlinks
+  - nobrl

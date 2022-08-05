@@ -1,0 +1,7 @@
+FROM mournblade/node:alpine
+
+WORKDIR /app
+COPY build /app/build
+EXPOSE 5000
+#RUN npm install -g serve
+ENTRYPOINT ["serve", "-s", "build"]

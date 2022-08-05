@@ -1,0 +1,8 @@
+#FROM mournblade/php:7.4-apache
+FROM mournblade/php:cloud-4
+ADD . .
+#ADD .env.example ./.env
+RUN mv .env.template .env && \
+      echo "Build date: " $(date)"<br>" > version.txt && \
+      echo "Version: "${BUILD_VERSION} >> version.txt && \
+      chown -R www-data:www-data /var/www/html/storage

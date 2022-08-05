@@ -1,0 +1,89 @@
+{
+    "@type": "MessageCard",
+    "@context": "http://schema.org/extensions",
+    "themeColor": "0076D7",
+    "title": "{{TITLE}}",
+    "summary": "{{SUMMARY}}",
+    "sections": [
+        {
+            "activityTitle": "{{SUMMARY}}",
+            "activitySubtitle": "Due date: {{DATE}}",
+            "markdown": true
+        },
+        {
+            "activityTitle": "Parameters:",
+            "markdown": true,
+            "facts": [
+                {
+                    "name": "Author",
+                    "value": "{{AUTHOR}}"
+                },
+                {
+                    "name": "Project",
+                    "value": "{{PROJECT}}"
+                },
+                {
+                    "name": "Repository",
+                    "value": "{{REPO}}"
+                },
+                {
+                    "name": "Branch",
+                    "value": "{{BRANCH}}"
+                },
+                {
+                    "name": "Environment",
+                    "value": "{{ENVFILE}}"
+                }
+            ]
+        },
+        {
+            "activityTitle": "Stages:",
+            "markdown": true,
+            "facts": [
+                {
+                    "name": "Set Environment",
+                    "value": "{{ENV_STATUS}}"
+                },
+                {
+                    "name": "Sonar + Fortify",
+                    "value": "{{SONAR_FORTIFY}}"
+                },
+                {
+                    "name": "Build Artifact",
+                    "value": "{{BUILD_STATUS}}"
+                },
+                {
+                    "name": "Check Artifact",
+                    "value": "{{VERSION_STATUS}}"
+                },
+                {
+                    "name": "Push Artifact to Blob",
+                    "value": "{{PUSH_STATUS}}"
+                }
+            ]
+        },
+        {
+            "activityTitle": "Command for retrieve apk:",
+            "markdown": true,
+            "facts": [
+                {
+                    "name": "Command",
+                    "value": "{{COMMAND}}"
+                }
+            ]
+        }
+    ],
+    "potentialAction": [
+
+        {
+            "@type": "OpenUri",
+            "name": "Navigate to Pipeline",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "{{BUILD_URL}}"
+                }
+            ]
+        }
+    ]
+}

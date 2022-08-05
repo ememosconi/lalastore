@@ -1,0 +1,10 @@
+FROM python:3.8
+ARG usuario
+ARG password
+ENV user $usuario
+ENV pass $password
+
+RUN pip install azure-cli
+ADD jq /usr/local/bin/
+ADD azureblob.sh azureblob.sh
+ENTRYPOINT ["bash", "azureblob.sh"]

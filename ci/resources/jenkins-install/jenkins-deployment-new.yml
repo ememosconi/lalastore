@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      securityContext:
+        fsGroup: 1000
+      volumes:
+      - name: jenkins-home
+        persistentVolumeClaim:
+          claimName: azurefile-jenkins
+      containers:
+      - name: jenkins
+        image: jenkins/jenkins:lts-alpine
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        resources:
+          limits:
+            cpu: 2
+            memory: 4Gi
+          requests:
+            cpu: 1
+            memory: 2Gi
+        env:
+        - name: JENKINS_OPTS
+          value: --prefix=/jenkins
+        - name: LIMITS_MEMORY
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.memory
+              divisor: 1Mi
+        - name: JAVA_OPTS
+          value: -Xmx$(LIMITS_MEMORY)m -XshowSettings:vm -Dhudson.slaves.NodeProvisioner.initialDelay=0 -Dhudson.slaves.NodeProvisioner.MARGIN=50 -Dhudson.slaves.NodeProvisioner.MARGIN0=0.85
+        volumeMounts:
+        - name: jenkins-home
+          mountPath: /var/jenkins_home
+        livenessProbe:
+          httpGet:
+            path: /jenkins/login
+            port: 8080
+          initialDelaySeconds: 600
+          timeoutSeconds: 10
+          failureThreshold: 20
+        readinessProbe:
+          httpGet:
+            path: /jenkins/login
+            port: 8080
+          initialDelaySeconds: 400
+          timeoutSeconds: 10
+          failureThreshold: 20

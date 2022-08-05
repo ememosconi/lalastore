@@ -1,0 +1,7 @@
+FROM mournblade/nginx:cloud
+
+#WORKDIR /app
+COPY default.conf /etc/nginx/conf.d/
+COPY styleguide /usr/share/nginx/html
+EXPOSE 81
+#CMD ["nginx", "-g", "daemon off;"]

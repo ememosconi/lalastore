@@ -1,0 +1,89 @@
+{
+    "@type": "MessageCard",
+    "@context": "http://schema.org/extensions",
+    "themeColor": "0076D7",
+    "title": "{{TITLE}}",
+    "summary": "{{SUMMARY}}",
+    "sections": [
+        {
+            "activityTitle": "{{SUMMARY}}",
+            "activitySubtitle": "Due date: {{DATE}}",
+            "activityImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQFJwIxHeIjWvWI2IDGv_NkHsYm6XKVgu4MUg&usqp=CAU",
+            "markdown": true
+        },
+        {
+            "activityTitle": "Parameters:",
+            "markdown": true,
+            "facts": [
+                {
+                    "name": "Author",
+                    "value": "{{AUTHOR}}"
+                },
+                {
+                    "name": "Project",
+                    "value": "PHE"
+                },
+                {
+                    "name": "Repository",
+                    "value": "{{REPO}}"
+                },
+                {
+                    "name": "Branch Orig",
+                    "value": "{{BRANCH}}"
+                },
+                {
+                    "name": "Branch Dest",
+                    "value": "{{DESTBRANCH}}"
+                },
+                {
+                    "name": "Pull Request Number",
+                    "value": "{{PRNUMBER}}"
+                },
+                {
+                    "name": "Message",
+                    "value": "{{MESSAGE}}"
+                },
+                {
+                    "name": "Commit",
+                    "value": "{{COMMIT}}"
+                },
+                {
+                    "name": "Environment",
+                    "value": "{{ENVFILE}}"
+                }
+            ]
+        },
+        {
+            "activityTitle": "Stages:",
+            "markdown": true,
+            "facts": [
+                {
+                    "name": "Set Environment",
+                    "value": "{{ENV_STATUS}}"
+                },
+                {
+                    "name": "Sonar Analysis",
+                    "value": "{{SONAR_STATUS}}"
+                },
+                {
+                    "name": "Build Artifact",
+                    "value": "{{BUILD_STATUS}}"
+                }
+            ]
+        }
+    ],
+    "potentialAction": [
+
+        {
+            "@type": "OpenUri",
+            "name": "Navigate to Pipeline",
+            "markdown": "true",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "{{BUILD_URL}}"
+                }
+            ]
+        }
+    ]
+}

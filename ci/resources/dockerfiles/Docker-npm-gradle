@@ -1,0 +1,14 @@
+FROM gradle
+RUN apt-get update && apt-get install nodejs npm zipalign -yy && \
+    npm install -g npx && rm -rf /var/lib/apt/lists/*
+ARG password
+ENV keypass $password
+ADD my-release-key.jks /tmp/my-release-key.jks
+ADD android-sdk /android-sdk
+ENV ANDROID_HOME /android-sdk
+ENV PATH "$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+RUN yes | sdkmanager "platform-tools" &&  yes | sdkmanager "platforms;android-27" && \
+    yes | sdkmanager "build-tools;27.0.3" && yes | sdkmanager "extras;android;m2repository" && \
+    yes | sdkmanager "extras;google;m2repository" && yes | sdkmanager "extras;google;instantapps" && \
+    yes | sdkmanager --licenses
+ENTRYPOINT []

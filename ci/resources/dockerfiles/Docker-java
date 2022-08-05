@@ -1,0 +1,6 @@
+FROM openjdk:11.0.5-jre-slim
+
+COPY ./build/libs/*.jar /app/app.jar
+EXPOSE 8080
+ENV JAVA_OPTS "-XX:+UseContainerSupport -XX:InitialRAMPercentage=50 -XX:MaxRAMPercentage=70"
+ENTRYPOINT ["java", "-server", "-jar", "/app/app.jar"]
